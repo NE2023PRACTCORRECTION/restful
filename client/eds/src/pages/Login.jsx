@@ -23,7 +23,7 @@ export default function Login() {
      const user = { email, password };
 
      const response = await axios.post(
-       "http://localhost:5000/user/login",
+       "http://localhost:5000/auth/user/login",
        user,
        {
         headers: {

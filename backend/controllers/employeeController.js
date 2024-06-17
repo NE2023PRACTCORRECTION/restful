@@ -54,7 +54,7 @@
 //     } catch (error) {
 //         res.status(500).send(error.message);
 //     }
-    
+
 // }
 
 const { Op } = require("sequelize");
@@ -113,14 +113,39 @@ exports.getEmployeeById = async (req, res) => {
   }
 };
 
+exports.updateEmployeeById = async (req, res) => {
+  const employeeId = req.params.id;
+  const updatedData = req.body; // Assuming the updated employee data is in the request body
+
+  try {
+    const employee = await Employee.findByPk(employeeId);
+
+    if (!employee) {
+      return res.status(404).json({ message: "Employee not found" });
+    }
+
+    await employee.update(updatedData);
+
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error("Error updating employee:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 exports.deleteEmployeeById = async (req, res) => {
   const employeeId = req.params.id;
 
   try {
-    const result = await Employee.destroy({ where: { id: employeeId } });
+    const result = await Employee.findByPk(employeeId);
     if (!result) {
       return res.status(404).send("Employee not found");
     }
+    await Employee.destroy({
+      where: {
+        id: employeeId
+      }
+    });
     res.status(200).send("Employee deleted successfully");
   } catch (error) {
     console.error(error);

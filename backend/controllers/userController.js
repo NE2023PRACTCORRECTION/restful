@@ -96,6 +96,7 @@ const User = require("../models/userModel");
 const { validate } = require("../utils/userValidations");
 
 exports.createUser = async (req, res) => {
+  console.log("called")
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -108,6 +109,7 @@ exports.createUser = async (req, res) => {
   try {
     let user = await User.findOne({ where: { email } });
     if (user) {
+      console.log("user already exists")
       return res
         .status(400)
         .send(`The user with email ${email} already exists`);
@@ -116,6 +118,7 @@ exports.createUser = async (req, res) => {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
+    console.log("finished hashing password")
     user = await User.create({
       email,
       password: hashedPassword
@@ -127,6 +130,7 @@ exports.createUser = async (req, res) => {
     });
     console.log(token);
 
+    console.log("about to send response")
     res.status(201).send({ user, token });
   } catch (error) {
     console.error(error);
@@ -157,7 +161,8 @@ exports.loginUser = async (req, res, next) => {
        .header("Authorization", `Bearer ${token}`)
        .json({
          success: true,
-         token: `Bearer ${token}`
+         token: `Bearer ${token}`,
+         user
        });
 
     next();
