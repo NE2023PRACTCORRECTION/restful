@@ -102,7 +102,7 @@
     "/create/employee": {
       "post": {
         "tags": [
-          "Todo"
+          "Employee"
         ],
         "description": "",
         "parameters": [
@@ -170,7 +170,7 @@
     "/all/employees": {
       "get": {
         "tags": [
-          "Todo"
+          "Employee"
         ],
         "description": "",
         "responses": {
@@ -197,7 +197,7 @@
     "/employee/{id}": {
       "get": {
         "tags": [
-          "Todo"
+          "Employee"
         ],
         "description": "",
         "parameters": [
@@ -235,7 +235,7 @@
     "/employee/update/{id}": {
       "put": {
         "tags": [
-          "Todo"
+          "Employee"
         ],
         "description": "",
         "parameters": [
@@ -273,7 +273,7 @@
     "/employee/delete/{id}": {
       "delete": {
         "tags": [
-          "Todo"
+          "Employee"
         ],
         "description": "",
         "parameters": [

@@ -16,7 +16,7 @@ router.use(
 
   employeeRoutes
   /* 
-  #swagger.tags = ['Todo']
+  #swagger.tags = ['Employee']
   #swagger.security = [{
             "bearerAuth": []
 }]

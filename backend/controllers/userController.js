@@ -171,3 +171,13 @@ exports.loginUser = async (req, res, next) => {
     res.status(500).send("An error occurred while logging in the user");
   }
 };
+
+exports.logoutUser = (req, res) => {
+  res
+    .status(200)
+    .header("Authorization", "") // Clear the token from the header
+    .json({
+      success: true,
+      message: "Logged out successfully"
+    });
+};

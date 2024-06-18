@@ -51,6 +51,7 @@
 // });
 
 const express = require("express");
+const morgan  =  require("morgan");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -75,6 +76,7 @@ var options = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(morgan("tiny"));
 app.use(router);
  app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
